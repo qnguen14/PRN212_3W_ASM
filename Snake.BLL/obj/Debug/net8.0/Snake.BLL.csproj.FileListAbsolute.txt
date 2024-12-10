@@ -1,0 +1,16 @@
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\bin\Debug\net8.0\Snake.BLL.deps.json
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\bin\Debug\net8.0\Snake.BLL.dll
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\bin\Debug\net8.0\Snake.BLL.pdb
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\bin\Debug\net8.0\Snake.DAL.dll
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\bin\Debug\net8.0\Snake.DAL.pdb
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\obj\Debug\net8.0\Snake.BLL.csproj.AssemblyReference.cache
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\obj\Debug\net8.0\Snake.BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\obj\Debug\net8.0\Snake.BLL.AssemblyInfoInputs.cache
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\obj\Debug\net8.0\Snake.BLL.AssemblyInfo.cs
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\obj\Debug\net8.0\Snake.BLL.csproj.CoreCompileInputs.cache
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\obj\Debug\net8.0\Snake.BLL.sourcelink.json
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\obj\Debug\net8.0\Snake.BLL.csproj.Up2Date
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\obj\Debug\net8.0\Snake.BLL.dll
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\obj\Debug\net8.0\refint\Snake.BLL.dll
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\obj\Debug\net8.0\Snake.BLL.pdb
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake.BLL\obj\Debug\net8.0\ref\Snake.BLL.dll
