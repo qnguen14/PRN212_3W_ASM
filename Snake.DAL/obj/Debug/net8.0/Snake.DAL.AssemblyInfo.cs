@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Snake.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b6cab117fde6a883d5998a4157758bdd442b52e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b3e57ca937b35c65d442f428e2185617b682c7f")]
 [assembly: System.Reflection.AssemblyProductAttribute("Snake.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Snake.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

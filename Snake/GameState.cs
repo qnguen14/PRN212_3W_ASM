@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Snake;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Snake
 {
@@ -10,21 +10,27 @@ namespace Snake
     {
         public int Rows { get; }
         public int Cols { get; }
-        public GridValue[,] Grid { get; }
+        public GridValue[,] Grid { get; private set; }
         public Direction Dir { get; private set; }
         public int Score { get; private set; }
-        public bool GameOver {  get; private set; }
+        public bool GameOver { get; private set; }
+
+        // Timer-related properties
+        public int RemainingTime { get; private set; }
+        public const int TOTAL_GAME_TIME = 60; // Game time in seconds
 
         private readonly LinkedList<Direction> dirChanges = new LinkedList<Direction>();
         private readonly LinkedList<Position> snakePositions = new LinkedList<Position>();
         private readonly Random random = new Random();
+        private Stopwatch gameTimer = new Stopwatch();
 
-        public GameState(int rows, int cols) 
+        public GameState(int rows, int cols)
         {
-            Rows = rows; 
+            Rows = rows;
             Cols = cols;
             Grid = new GridValue[rows, cols];
             Dir = Direction.Right;
+            RemainingTime = TOTAL_GAME_TIME;
 
             AddSnake();
             AddFood();
@@ -42,7 +48,7 @@ namespace Snake
 
         private IEnumerable<Position> EmptyPositions()
         {
-            for(int r = 0; r < Rows; r++)
+            for (int r = 0; r < Rows; r++)
             {
                 for (int c = 0; c < Cols; c++)
                 {
@@ -53,10 +59,11 @@ namespace Snake
                 }
             }
         }
+
         private void AddFood()
         {
             List<Position> empty = new List<Position>(EmptyPositions());
-            if(empty.Count == 0)
+            if (empty.Count == 0)
             {
                 return;
             }
@@ -69,6 +76,7 @@ namespace Snake
         {
             return snakePositions.First.Value;
         }
+
         public Position TailPosition()
         {
             return snakePositions.Last.Value;
@@ -85,15 +93,16 @@ namespace Snake
             Grid[pos.Row, pos.Col] = GridValue.Snake;
         }
 
-        private void RemoveTail() 
-        { 
+        private void RemoveTail()
+        {
             Position tail = snakePositions.Last.Value;
             Grid[tail.Row, tail.Col] = GridValue.Empty;
             snakePositions.RemoveLast();
         }
+
         private Direction GetLastDirection()
         {
-            if(dirChanges.Count == 0)
+            if (dirChanges.Count == 0)
             {
                 return Dir;
             }
@@ -102,19 +111,20 @@ namespace Snake
 
         private bool CanChangeDirection(Direction newDir)
         {
-            if(dirChanges.Count == 2)
+            if (dirChanges.Count == 2)
             {
                 return false;
             }
             Direction lastDir = GetLastDirection();
             return newDir != lastDir && newDir != lastDir.Opposite();
         }
+
         public void ChangeDirection(Direction dir)
         {
-            if (CanChangeDirection(dir)) 
+            if (CanChangeDirection(dir))
             {
                 dirChanges.AddLast(dir);
-            }             
+            }
         }
 
         private bool OutsideGrid(Position pos)
@@ -137,7 +147,7 @@ namespace Snake
 
         public void Move()
         {
-            if(dirChanges.Count > 0)
+            if (dirChanges.Count > 0)
             {
                 Dir = dirChanges.First.Value;
                 dirChanges.RemoveFirst();
@@ -161,5 +171,49 @@ namespace Snake
             }
         }
 
+        public void StartTimer()
+        {
+            gameTimer.Reset();
+            gameTimer.Start();
+        }
+
+        public bool UpdateTimer()
+        {
+            if (!gameTimer.IsRunning)
+            {
+                return true;
+            }
+
+            int elapsedSeconds = (int)gameTimer.Elapsed.TotalSeconds;
+            RemainingTime = Math.Max(TOTAL_GAME_TIME - elapsedSeconds, 0);
+
+            if (RemainingTime <= 0)
+            {
+                GameOver = true;
+                gameTimer.Stop();
+                return false;
+            }
+            return true;
+        }
+
+        public void Reset()
+        {
+            // Reset game state
+            Grid = new GridValue[Rows, Cols];
+            dirChanges.Clear();
+            snakePositions.Clear();
+
+            Dir = Direction.Right;
+            Score = 0;
+            RemainingTime = TOTAL_GAME_TIME;
+            GameOver = false;
+
+            // Reinitialize game elements
+            AddSnake();
+            AddFood();
+
+            // Restart timer
+            StartTimer();
+        }
     }
 }
