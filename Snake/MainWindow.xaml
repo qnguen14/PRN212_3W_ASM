@@ -67,6 +67,44 @@
                            VerticalAlignment="Center"
                            TextWrapping="Wrap"/>
             </Border>
+            <TextBlock x:Name="NewRecordText"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    FontSize="24"
+                    Foreground="Yellow"
+                    Visibility="Collapsed"
+                    Margin="0,85,0,0" Grid.Row="1" TextAlignment="Center"><Run Text="Congratulations! "/><LineBreak/><Run Text="New Record!"/></TextBlock>
+            <DataGrid x:Name="Ranking"
+                    HorizontalAlignment="Left" 
+                    Height="93" 
+                    Margin="570,0,0,0" 
+                    Grid.Row="1" 
+                    VerticalAlignment="Top" 
+                    Width="166" 
+                    AutoGenerateColumns="False" 
+                    FontSize="10" 
+                    Background="{DynamicResource BackgroundColor}" 
+                    Foreground="{StaticResource DataGridTextColor}" 
+                    BorderBrush="{StaticResource DataGridBorderColor}" 
+                    BorderThickness="1" 
+                    RowBackground="{StaticResource DataGridRowBackground}" 
+                    AlternatingRowBackground="{StaticResource DataGridAltRowBackground}" 
+                    d:ItemsSource="{d:SampleData ItemCount=5}"
+                    HeadersVisibility="None"
+                    IsReadOnly="True"
+                    IsHitTestVisible="False"
+                    >
+                <DataGrid.Columns>
+                    
+                    <DataGridTextColumn Header="Name" Binding="{Binding User.Username}" Width="82" />
+                    <DataGridTextColumn Header="Score" Binding="{Binding Score}" Width="82" SortMemberPath="Score"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock x:Name="Rank"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="Ranking"
+                FontSize="22" Width="93" Margin="607,0,0,0" RenderTransformOrigin="0.979,0.465"/>
         </Grid>
     </Viewbox>
 </Window>

@@ -52,7 +52,7 @@ namespace Snake
 
             User user = new User()
             {
-                Username = TxtEmail.Text,
+                Username = TxtUsername.Text,
                 Password = TxtPassword.Password,
                 Role = "player",
                 Email = TxtEmail.Text,

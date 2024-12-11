@@ -1,4 +1,5 @@
-﻿using Snake.DAL.Models;
+﻿using Snake.BLL.Services;
+using Snake.DAL.Models;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,6 +38,10 @@ namespace Snake
         private readonly Image[,] gridImages;
         private GameState gameState;
         private bool gameRunning;
+        // Store the highest score in memory
+        private int highestScoreInMemory = 0; 
+        //Call Service of LeaderBoard
+        private LeaderboardService _LService = new();
         public MainWindow()
         {
             InitializeComponent();
@@ -129,6 +134,8 @@ namespace Snake
             DrawGrid();
             DrawSnakeHead();
             ScoreText.Text = $"CORE {gameState.Score}";
+            // Update score in memory during gameplay
+            UpdateScoreInMemory(CurrentUser.UserId, gameState.Score);
         }
         private void DrawGrid()
         {
@@ -183,12 +190,112 @@ namespace Snake
 
 
             LoggedIn.Text = $"Hello, {CurrentUser.Username}";
+            //Load RankingBoard
+            FillRankBoard(_LService.GetAllScores());
+        }
+        private void FillRankBoard(List<Leaderboard> arr)
+        {
+            var sortedList = arr.OrderByDescending(item => item.Score).Take(5).ToList();
+
+            
+            Ranking.ItemsSource = null;
+            Ranking.ItemsSource = sortedList;
+        }
+        private void SaveScoreToDatabase(int UserId, int Score)
+        {
+            if (CurrentUser != null)
+            {
+                try
+                {
+                    var allScores = _LService.GetAllScores();
+                    var existingScore = allScores.FirstOrDefault(x => x.UserId == UserId);
+
+                    if (existingScore != null)
+                    {
+                        if (Score > existingScore.Score)
+                        {
+                            existingScore.Score = Score;
+                            _LService.UpdateScore(existingScore);
+                            ShowNewRecordOnScreen();
+                        }
+                    }
+                    else
+                    {
+                        var newScore = new Leaderboard
+                        {
+                            UserId = UserId,
+                            Score = Score,
+                            AchievedAt = DateTime.Now
+                        };
+
+                        _LService.SaveScore(newScore);
+                    }
+                    FillRankBoard(_LService.GetAllScores());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Failed to save the score: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+        private void UpdateScoreInMemory(int UserId, int Score)
+        {
+            var allScores = _LService.GetAllScores();
+            var userScore = allScores.FirstOrDefault(x => x.UserId == UserId);
+            if (userScore != null) highestScoreInMemory = userScore.Score;
+
+            var leaderboard = (List<Leaderboard>)Ranking.ItemsSource;
+            if (Score > highestScoreInMemory)
+            {
+                highestScoreInMemory = Score; // Update in-memory score
+
+                // Find the specific user's record in DataGrid
+
+                var existingScore = leaderboard.FirstOrDefault(x => x.UserId == UserId);
+
+                if (existingScore != null)
+                {
+                    // Update the score directly in DataGrid's source
+                    existingScore.Score = Score;
+                }
+                else
+                {
+                    // Add new record if not exist
+                    leaderboard.Add(new Leaderboard
+                    {
+                        UserId = UserId,
+                        Score = Score,
+                        AchievedAt = DateTime.Now,
+                        User = CurrentUser
+                    });
+                }
+
+                // Refresh DataGrid
+                FillRankBoard(leaderboard);
+            }
+
+        }
+
+        private void ShowNewRecordOnScreen()
+        {
+            NewRecordText.Visibility = Visibility.Visible;
+
+            // hide the message after 1.5 seconds
+            Task.Delay(1500).ContinueWith(_ =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    NewRecordText.Visibility = Visibility.Collapsed;
+                });
+            });
         }
 
         private async Task ShowGameOver()
         {
             await DrawDeadSnake();
             await Task.Delay(1000);
+            //save score when game over
+            SaveScoreToDatabase(CurrentUser.UserId, highestScoreInMemory);
             Overlay.Visibility = Visibility.Visible;
             OverlayText.Text = "PRESS ANY KEY TO START";
         }
