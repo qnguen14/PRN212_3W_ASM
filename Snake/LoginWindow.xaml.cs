@@ -64,7 +64,14 @@ namespace Snake
 
         private void RegiserButton_Click(object sender, RoutedEventArgs e)
         {
+            RegisterWindow r = new();
+            r.Show();
+            this.Hide();
+        }
 
+        private void QuitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

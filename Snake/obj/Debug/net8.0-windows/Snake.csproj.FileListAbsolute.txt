@@ -72,3 +72,5 @@ D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\obj\Debug\net8.0-windows\Snake.csproj.
 D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\obj\Debug\net8.0-windows\LoginWindow.g.cs
 D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\obj\Debug\net8.0-windows\LoginWindow.baml
 D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\bin\Debug\net8.0-windows\appsettings.json
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\obj\Debug\net8.0-windows\RegisterWindow.g.cs
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\obj\Debug\net8.0-windows\RegisterWindow.baml
