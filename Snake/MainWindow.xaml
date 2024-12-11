@@ -13,7 +13,8 @@
         WindowStartupLocation="CenterScreen"
         Icon="Assets/icon.ico"
         PreviewKeyDown="Window_PreviewKeyDown"
-        KeyDown="Window_KeyDown">
+        KeyDown="Window_KeyDown"
+        Loaded="Window_Loaded">
     <Viewbox>
         <Grid>
             <Grid.RowDefinitions>
@@ -22,11 +23,19 @@
             </Grid.RowDefinitions>
 
             <TextBlock x:Name="ScoreText"
-               HorizontalAlignment="Center"
+               HorizontalAlignment="Left"
                VerticalAlignment="Center"
                Text="SCORE 0"
-               FontSize="22"
-               Margin="10"/>
+               FontSize="22" Width="93" Margin="330,0,0,0"/>
+
+            <TextBlock
+                    x:Name="LoggedIn"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="Hello, GUEST"
+                    FontSize="22" Width="291" Margin="20,0,0,0"/>
+
+
             <Border x:Name="GridBorder"
             Grid.Row="1"
             BorderBrush="{StaticResource GridLineColor}"

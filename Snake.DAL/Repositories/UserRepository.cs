@@ -11,10 +11,10 @@ namespace Snake.DAL.Repositories
     {
         private SnakeGameContext _db;
 
-        public User GetOne(string username, string password)
+        public User GetOne(string email, string password)
         {
             _db = new();
-            return _db.Users.FirstOrDefault(u => u.Username.Equals(username) && u.Password.Equals(password));
+            return _db.Users.FirstOrDefault(u => u.Email.Equals(email) && u.Password.Equals(password));
         }
     }
 }

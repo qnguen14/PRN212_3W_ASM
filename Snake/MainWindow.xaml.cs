@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Snake.DAL.Models;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +17,8 @@ namespace Snake
     /// </summary>
     public partial class MainWindow : Window
     {
+        public User CurrentUser { get; set; } 
+
         private readonly Dictionary<GridValue, ImageSource> gridValToImage = new()
         {
             {GridValue.Empty, Images.Empty },
@@ -169,6 +172,19 @@ namespace Snake
             int rotation = dirToRotation[gameState.Dir];
             image.RenderTransform = new RotateTransform(rotation);
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        { 
+            if (CurrentUser == null)
+            {
+                LoggedIn.Text = "Hello, NOT LOGGED IN";
+                return;
+            }
+
+
+            LoggedIn.Text = $"Hello, {CurrentUser.Username}";
+        }
+
         private async Task ShowGameOver()
         {
             await DrawDeadSnake();

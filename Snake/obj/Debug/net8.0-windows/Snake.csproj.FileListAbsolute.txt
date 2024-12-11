@@ -69,3 +69,6 @@ D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\bin\Debug\net8.0-windows\Snake.BLL.pdb
 D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\bin\Debug\net8.0-windows\Snake.DAL.pdb
 D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\obj\Debug\net8.0-windows\Snake.csproj.AssemblyReference.cache
 D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\obj\Debug\net8.0-windows\Snake.csproj.Up2Date
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\obj\Debug\net8.0-windows\LoginWindow.g.cs
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\obj\Debug\net8.0-windows\LoginWindow.baml
+D:\fpt\FA24\PRN212_3W\ASM\GameSnake\Snake\bin\Debug\net8.0-windows\appsettings.json

@@ -12,9 +12,9 @@ namespace Snake.BLL.Services
     {
         private UserRepository _repo = new();
 
-        public User Authenticate(string username, string password)
+        public User Authenticate(string email, string password)
         {
-            return _repo.GetOne(username, password);
+            return _repo.GetOne(email, password);
         }
     }
 }
